@@ -4,7 +4,7 @@ import datetime
 import configparser
 import argparse
 
-def execute_sql_files(directory, repo_git, db_params):
+def execute_sql_files(directory, repo_git, db_params, tab_param_file):
     # Connexion à la BDD
     connection = psycopg2.connect(
         host=db_params["host"],
@@ -14,8 +14,9 @@ def execute_sql_files(directory, repo_git, db_params):
     )
 
     cursor = connection.cursor()
+    
     # Récupère l'ordre depuis le fichier de paramètres
-    with open(os.path.join(directory, repo_git, "tabDeParam.txt"), "r") as file:
+    with open(os.path.join(tab_param_file), "r") as file:
         order = file.readlines()
     order = [x.strip() for x in order]
     
@@ -65,8 +66,9 @@ db_params = {
     "password": config.get(environnement, "db_password")
 }
 
-# Récupère l'URL du repo Git
-repo_git_url = "https://github.com/DavidGhidalia/repoGitPyToSql/blob/master/codePythonTabToEnv.py"
+# Récupère l'URL du repo Git et le chemin d'accès au fichier de paramètres
+repo_git_url = config.get("DEFAULT", "repo_git_url")
+tab_param_file = config.get("DEFAULT", "tab_param_file")
 
 # Clone le repo Git s'il n'existe pas déjà
 if not os.path.exists(repo_git_url.split("/")[-1]):
@@ -75,4 +77,4 @@ if not os.path.exists(repo_git_url.split("/")[-1]):
 # Récupère le nom du dossier racine du repo Git
 repo_git = repo_git_url.split("/")[-1].split(".")[0]
 
-execute_sql_files(".", repo_git, db_params)
+execute_sql_files(".", repo_git, db_params, tab_param_file)
