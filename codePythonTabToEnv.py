@@ -66,7 +66,7 @@ db_params = {
 }
 
 # Récupère l'URL du repo Git
-repo_git_url = config.get("DEFAULT", "repo_git_url")
+repo_git_url = "https://github.com/DavidGhidalia/repoGitPyToSql/blob/master/codePythonTabToEnv.py"
 
 # Clone le repo Git s'il n'existe pas déjà
 if not os.path.exists(repo_git_url.split("/")[-1]):
