@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS sports_tr (
+  sport_id integer 
+      REFERENCES sports(id) 
+      ON UPDATE CASCADE 
+      ON DELETE CASCADE,
+  lang_code lang 
+      REFERENCES languages(code) 
+      ON UPDATE CASCADE,
+  name varchar(128) NOT NULL,
+  short_name VARCHAR(50),
+  label_point VARCHAR(50),
+  label_set VARCHAR(50),
+  CONSTRAINT sports_tr_pkey PRIMARY KEY (sport_id, lang_code)
+);
+

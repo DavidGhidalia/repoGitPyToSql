@@ -1,0 +1,4 @@
+DROP TRIGGER IF EXISTS create_perf ON users;
+
+CREATE TRIGGER create_perf AFTER INSERT ON users
+    FOR EACH ROW EXECUTE PROCEDURE create_perf();

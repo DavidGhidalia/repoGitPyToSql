@@ -1,0 +1,7 @@
+DROP TRIGGER IF EXISTS trg_teams_name ON teams;
+
+
+CREATE TRIGGER trg_teams_name
+BEFORE INSERT OR UPDATE ON teams 
+FOR EACH ROW 
+EXECUTE PROCEDURE trg_teams_name();

@@ -1,0 +1,5 @@
+DROP TRIGGER IF EXISTS trg_matches ON matches;
+
+
+CREATE TRIGGER trg_matches AFTER UPDATE ON matches
+FOR EACH ROW EXECUTE PROCEDURE trg_matches();

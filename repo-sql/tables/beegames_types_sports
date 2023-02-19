@@ -1,0 +1,12 @@
+CREATE TABLE IF EXISTS beegames_types_sports (
+  type_id integer references beegames_types(id) 
+        ON UPDATE CASCADE 
+        ON DELETE CASCADE,
+  sport_id integer references sports(id) 
+        ON UPDATE CASCADE 
+        ON DELETE CASCADE,
+  markets integer[] default '{}',
+  label varchar(64),
+  background_url varchar(256),
+  CONSTRAINT beegames_types_sports_pkey PRIMARY KEY (type_id, sport_id)
+);
